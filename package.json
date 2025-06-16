@@ -5,17 +5,19 @@
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
     "mysql2": "^3.14.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "chai": "^5.2.0",
+    "eslint": "^9.29.0",
     "mocha": "^11.5.0",
     "nyc": "^17.1.0",
     "sinon": "^20.0.0",
     "sinon-chai": "^4.0.0"
   },
   "scripts": {
-    "test": "mocha",
-    "coverage": "nyc mocha"
-  }
+  "lint": "eslint ."
+}
 }

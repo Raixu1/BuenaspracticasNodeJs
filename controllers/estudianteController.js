@@ -5,8 +5,10 @@ const { validationResult } = require('express-validator');
 // Listar todos los estudiantes o filtrar por nombre/email usando Op.and y Op.or
 exports.listarEstudiantes = async (req, res) => {
   try {
-    const { nombre, email, pagina, limite } = req.body; 
-    let offset = limite * (pagina - 1);
+    const { nombre, email } = req.body;
+    const pagina = parseInt(req.body.pagina) || 1;
+    const limite = parseInt(req.body.limite) || 10;
+    const offset = limite * (pagina - 1);
     let where = {};
 
     if (nombre && email) {
@@ -47,13 +49,10 @@ exports.registrarEstudiante = async (req, res) => {
     const estudiante = await Estudiante.create({ nombre, email, fecha_nacimiento });
     res.json(estudiante);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
-
-
-
-
 
 
 exports.registrarEstudiantesMasivo = async (req, res) => {
@@ -68,6 +67,11 @@ exports.registrarEstudiantesMasivo = async (req, res) => {
 
 // Actualizar un estudiante
 exports.actualizarEstudiante = async (req, res) => {
+  // Validar los datos recibidos
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { id } = req.params;
   const { nombre, email, fecha_nacimiento } = req.body;
   try {

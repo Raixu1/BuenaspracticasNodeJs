@@ -1,8 +1,4 @@
 const sequelize = require('../config/database');
-const Curso = require('./Curso');
-const Estudiante = require('./Estudiante');
-const Profesor = require('./Profesor');
-const Inscripcion = require('./Inscripcion');
 
 (async () => {
   try {

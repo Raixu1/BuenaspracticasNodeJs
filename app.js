@@ -4,6 +4,10 @@ app.use(express.json());
 
 require('./models/relaciones');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 const cursoRoutes = require('./routes/cursoRoutes');
 app.use('/cursos', cursoRoutes);
 
